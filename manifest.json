@@ -1,0 +1,21 @@
+{
+  "name": "Premium Weather SaaS",
+  "short_name": "WeatherPro",
+  "description": "A high-performance, dynamic weather tracking application.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f2027",
+  "theme_color": "#00e5ff",
+  "icons": [
+    {
+      "src": "https://openweathermap.org/img/wn/02d@4x.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://openweathermap.org/img/wn/01d@4x.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
