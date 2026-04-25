@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Animesh Bauri">
+    <meta name="description" content="Premium, offline-capable Weather Dashboard with dynamic themes, AQI, and interactive maps.">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00e5ff">
+    <link rel="apple-touch-icon" href="https://openweathermap.org/img/wn/01d@4x.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#0f2027">
+    
+    <title>Premium Weather SaaS</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div id="weather-animation-layer"></div>
+
+    <div class="app-container">
+        <div id="weather-alert" class="alert-banner hidden">
+            <i class="fas fa-exclamation-triangle"></i> <span id="alert-text">Severe Weather Warning</span>
+        </div>
+
+        <header>
+            <div class="search-box">
+                <input type="text" id="city-input" placeholder="Search city..." aria-label="City search input">
+                <button id="voice-btn" aria-label="Voice Search" title="Voice Search"><i class="fas fa-microphone"></i></button>
+                <button id="search-btn" aria-label="Search"><i class="fas fa-search"></i></button>
+                <button id="location-btn" aria-label="Use my location" title="Use My Location"><i class="fas fa-location-crosshairs"></i></button>
+            </div>
+            <div class="header-actions">
+                <div class="unit-toggle">
+                    <button id="celsius-btn" class="active" aria-label="Celsius">°C</button>
+                    <button id="fahrenheit-btn" aria-label="Fahrenheit">°F</button>
+                </div>
+                <button id="share-btn" class="icon-btn hidden" title="Share Weather"><i class="fas fa-share-nodes"></i></button>
+            </div>
+        </header>
+
+        <div id="recent-searches" class="recent-pills"></div>
+
+        <main>
+            <div id="empty-state" class="empty-state">
+                <i class="fas fa-cloud-sun fa-4x"></i>
+                <h2>Welcome to WeatherPro</h2>
+                <p>Search for a city or use your location to get started.</p>
+            </div>
+
+            <div id="error-message" class="error-ui hidden"></div>
+
+            <section id="current-weather" class="glass-card hidden">
+                <div class="weather-header">
+                    <h1 id="city-name" class="skeleton-text">City Name</h1>
+                    <p id="date-time" class="skeleton-text">Loading...</p>
+                </div>
+                
+                <div class="weather-body">
+                    <div class="temp-container">
+                        <img id="weather-icon" src="" alt="Current Weather Icon">
+                        <h2 id="temperature" class="skeleton-text">--°</h2>
+                    </div>
+                    <div class="weather-desc">
+                        <h3 id="condition" class="skeleton-text">Condition</h3>
+                        <p>Feels like: <span id="feels-like" class="skeleton-text">--°</span></p>
+                        <span id="aqi-badge" class="context-pill aqi-pill hidden">AQI: --</span>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail"><i class="fas fa-water"></i><div><p>Humidity</p><span id="humidity" class="skeleton-text">--%</span></div></div>
+                    <div class="detail"><i class="fas fa-wind"></i><div><p>Wind</p><span id="wind-speed" class="skeleton-text">--</span></div></div>
+                    <div class="detail"><i class="fas fa-sun"></i><div><p>Sun</p><span id="sun-times" class="skeleton-text">--:--</span></div></div>
+                </div>
+            </section>
+
+            <section id="hourly-forecast" class="hidden">
+                <h3>Next 24 Hours</h3>
+                <div class="hourly-scroll" id="hourly-container"></div>
+            </section>
+
+            <section id="forecast" class="hidden">
+                <h3>5-Day Forecast</h3>
+                <div class="forecast-grid" id="forecast-container"></div>
+            </section>
+
+            <section id="map-section" class="glass-card hidden">
+                <h3>Weather Map</h3>
+                <div class="map-controls">
+                    <button class="layer-btn active" data-layer="precipitation_new">🌧️ Rain</button>
+                    <button class="layer-btn" data-layer="temp_new">🌡️ Temp</button>
+                    <button class="layer-btn" data-layer="wind_new">💨 Wind</button>
+                </div>
+                <div id="weather-map"></div>
+            </section>
+
+            <section id="compare-section" class="hidden">
+                <h3>Compare Cities</h3>
+                <div class="compare-grid" id="compare-container">
+                    <button id="add-compare-btn" class="add-card"><i class="fas fa-plus"></i> Add Current City</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
